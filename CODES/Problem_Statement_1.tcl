@@ -20,8 +20,6 @@ $ns color 6 black
 $ns color 7 brown
 $ns color 8 purple
 
-#dynamic routing
-$ns rtproto DV
 
 # nam file for tracing the network
 set nf [open Problem_Statement_1.nam w]
@@ -67,10 +65,10 @@ for {set i 0} {$i<expr[3]} {incr i} {
 set n($i) [$ns node]
 }
 
-#Creating Links: SFQ = Stochastic Fair Queuing if queue gets full
-$ns duplex-link $n(0) $n(1) $B1 10ms SFQ
+#Creating Links: DropTail = Queuing strategy if queue gets full
+$ns duplex-link $n(0) $n(1) $B1 10ms DropTail
 $ns queue-limit $n(0) $n(1) $N1
-$ns duplex-link $n(1) $n(2) $B2 10ms SFQ
+$ns duplex-link $n(1) $n(2) $B2 10ms DropTail
 $ns queue-limit $n(1) $n(2) $N2
 
 #input k(number of pairs to be connected) pairs
