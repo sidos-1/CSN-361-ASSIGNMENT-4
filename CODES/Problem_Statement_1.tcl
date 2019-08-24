@@ -111,7 +111,7 @@ for {set i 0} {$i < $k} {incr i} {
 
         set cbr($i) [new Application/Traffic/CBR]
         $cbr($i) set packetSize_ $P
-        $cbr($i) set interval_ 0.005
+        $cbr($i) set interval_ 0.0005
         $cbr($i) attach-agent $udp($i)
 }
 

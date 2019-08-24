@@ -55,13 +55,21 @@ proc finish {} {
 #
 Agent/Ping instproc recv {from rtt} {
 $self instvar node_
-puts "node [$node_ id]received answer from $from with round trip time $rtt msec"
+puts "node [$node_ id] received packet from $from with round trip time $rtt msec"
 }
 
 
 #input n
-puts "Enter Queue Size ( common for all links : assumed) : "
-set N [gets stdin]
+puts "Enter Queue Size ( n0 - n2 link ) : "
+set N1 [gets stdin]
+puts "Enter Queue Size ( n1 - n2 link ) : "
+set N2 [gets stdin]
+puts "Enter Queue Size ( n2 - n3 link ) : "
+set N3 [gets stdin]
+puts "Enter Queue Size ( n3 - n4 link ) : "
+set N4 [gets stdin]
+puts "Enter Queue Size ( n3 - n5 link ) : "
+set N5 [gets stdin]
 
 
 puts "(correct format : 512kB OR 10Mb , etc)"
@@ -83,20 +91,20 @@ set n($i) [$ns node]
 
 #Creating Links: DropTail = Queuing strategy if queue gets full
 $ns duplex-link $n(0) $n(2) $B1 1ms DropTail
-$ns queue-limit $n(0) $n(2) $N
+$ns queue-limit $n(0) $n(2) $N1
 $ns duplex-link $n(1) $n(2) $B2 1ms DropTail
-$ns queue-limit $n(1) $n(2) $N
+$ns queue-limit $n(1) $n(2) $N2
 $ns duplex-link $n(2) $n(3) $B3 1ms DropTail
-$ns queue-limit $n(2) $n(3) $N
+$ns queue-limit $n(2) $n(3) $N3
 $ns duplex-link $n(3) $n(4) $B4 1ms DropTail
-$ns queue-limit $n(3) $n(4) $N
+$ns queue-limit $n(3) $n(4) $N4
 $ns duplex-link $n(3) $n(5) $B5 1ms DropTail
-$ns queue-limit $n(3) $n(5) $N
+$ns queue-limit $n(3) $n(5) $N5
 
 # Generating Ping Agents
 set ping(0) [new Agent/Ping]
 $ns attach-agent $n(0) $ping(0)
-$ping(0) set packetSize_ 50000
+$ping(0) set packetSize_ 5000
 $ping(0) set interval_ 0.0001
 
 set ping(1) [new Agent/Ping]
@@ -113,7 +121,7 @@ $ns attach-agent $n(4) $ping(4)
 
 set ping(5) [new Agent/Ping]
 $ns attach-agent $n(5) $ping(5)
-$ping(5) set packetSize_ 50000
+$ping(5) set packetSize_ 5000
 $ping(5) set interval_ 0.0001
 
 
