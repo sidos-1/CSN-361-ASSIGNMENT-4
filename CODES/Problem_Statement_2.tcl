@@ -45,7 +45,7 @@ proc finish {} {
         # & - execute it in baclground
         exec nam Problem_Statement_2.nam &
         exit 0
-        }
+}
 
 
 # process to print the details of the ping process
