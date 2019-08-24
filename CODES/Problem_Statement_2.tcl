@@ -131,11 +131,11 @@ $ns connect $ping(5) $ping(1)
 
 # PING PROCESS
 
-for {set i 0.1} {$i < 4} {set i [expr {$i+0.2}]} {
+for {set i 0.1} {$i < 4} {set i [expr {$i+0.02}]} {
     $ns at $i "$ping(0) send"
 }
 
-for {set i 0.1} {$i < 4} {set i [expr {$i+0.2}]} {
+for {set i 0.1} {$i < 4} {set i [expr {$i+0.02}]} {
     $ns at $i "$ping(5) send"
 }
 
