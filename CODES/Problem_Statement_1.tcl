@@ -48,7 +48,11 @@ proc finish {} {
         exit 0
         }
 
-#input n
+#input
+puts "Enter Packet Size : "
+set P [gets stdin]
+
+
 puts "Enter Queue Size ( n0 - n1 link ) : "
 set N1 [gets stdin]
 puts "Enter Queue Size ( n1 - n2 link ) : "
@@ -61,7 +65,7 @@ puts "Enter Bandwidth ( n1 - n2 link ) : "
 set B2 [gets stdin]
 
 #creating Nodes        
-for {set i 0} {$i<expr[3]} {incr i} {
+for {set i 0} {$i<3} {incr i} {
 set n($i) [$ns node]
 }
 
@@ -92,7 +96,7 @@ for {set i 0} {$i<$k} {incr i} {
 for {set i 0} {$i < $k} {incr i} {
 
         set udp($i) [new Agent/UDP]
-        $tcp($i) set class_ $i
+        $udp($i) set class_ $i
         $ns attach-agent $n($n1($i)) $udp($i)
 
 # sink node
@@ -106,7 +110,7 @@ for {set i 0} {$i < $k} {incr i} {
 for {set i 0} {$i < $k} {incr i} {
 
         set cbr($i) [new Application/Traffic/CBR]
-        $cbr($i) set packetSize_ 500
+        $cbr($i) set packetSize_ $P
         $cbr($i) set interval_ 0.005
         $cbr($i) attach-agent $udp($i)
 }
@@ -116,7 +120,7 @@ for {set i 0} {$i < $k} {incr i} {
 
         $ns at 0.1 "$cbr($i) start"
         
-        $ns at 1.5 "$cbr($i) stop"
+        $ns at 1.9 "$cbr($i) stop"
         
 }
 

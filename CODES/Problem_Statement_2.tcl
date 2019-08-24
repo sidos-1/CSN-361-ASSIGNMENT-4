@@ -77,7 +77,7 @@ puts "Enter Bandwidth ( n3 - n5 link ) : "
 set B5 [gets stdin]
 
 #creating Nodes        
-for {set i 0} {$i<expr[6]} {incr i} {
+for {set i 0} {$i<6} {incr i} {
 set n($i) [$ns node]
 }
 

@@ -15,7 +15,7 @@
 #
 BEGIN{ c=0;}
 {
-if($1= ="d")
+if($1=="d")
     { c++;
     printf("Packet type: %s\t Sequence ID : %s\t Packet ID : %s\n",$5,$11,$12);
     }
